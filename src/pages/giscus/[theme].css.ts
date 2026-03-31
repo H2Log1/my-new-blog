@@ -102,8 +102,7 @@ main {
   --color-fg-default: ${foreground};
   --color-fg-muted: ${muted(foreground, 80)};
   --color-fg-subtle: ${muted(foreground, 70)};
-  // --color-canvas-default: ${background};
-  -- color-canvas-default: transparent;
+  --color-canvas-default: ${background};
   --color-canvas-overlay: ${altBackground};
   --color-canvas-inset: ${altBackground};
   --color-canvas-subtle: ${background};
@@ -132,6 +131,20 @@ main {
 
 main .pagination-loader-container {
   background-image: url("https://github.com/images/modules/pulls/progressive-disclosure-line-dark.svg");
+}
+
+.giscus::before {
+  content: "guest@h2log1:~$ ./read-comments.sh";
+  display: block;
+  color: ${accent}; 
+  font-family: monospace;
+  margin-bottom: 1.5rem;
+}
+
+.gsc-main {
+  border: 1px dashed ${muted(foreground, 20)};
+  padding: 1.5rem;
+  background-color: ${muted(foreground, 2)};
 }
 
 /*! Custom CSS */
