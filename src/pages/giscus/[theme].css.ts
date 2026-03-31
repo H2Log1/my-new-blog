@@ -133,20 +133,6 @@ main .pagination-loader-container {
   background-image: url("https://github.com/images/modules/pulls/progressive-disclosure-line-dark.svg");
 }
 
-.giscus::before {
-  content: "guest@h2log1:~$ ./read-comments.sh";
-  display: block;
-  color: ${accent}; 
-  font-family: monospace;
-  margin-bottom: 1.5rem;
-}
-
-.gsc-main {
-  border: 1px dashed ${muted(foreground, 20)};
-  padding: 1.5rem;
-  background-color: ${muted(foreground, 2)};
-}
-
 /*! Custom CSS */
 
 textarea::placeholder,
@@ -197,7 +183,8 @@ div.gsc-comment-content code {
 }
 
 .gsc-homepage-bg {
-  background-color: ${background};
+  /* background-color: ${background}; */
+  background-color: ${muted(foreground, 2)};
 }
 
 main .gsc-loading-image {
