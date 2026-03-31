@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # 建议用 LTS 版本
+          node-version: '22' # 建议用 LTS 版本
           cache: 'npm'
 
       # 3. 安装依赖并打包
