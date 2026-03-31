@@ -6,8 +6,7 @@ import Color from 'color'
 import type { ColorStyles } from '~/types'
 
 interface Props {
-  // theme: BundledShikiTheme
-  theme: 'transparent_dark'
+  theme: BundledShikiTheme
   colorStyles: ColorStyles
 }
 
@@ -103,7 +102,8 @@ main {
   --color-fg-default: ${foreground};
   --color-fg-muted: ${muted(foreground, 80)};
   --color-fg-subtle: ${muted(foreground, 70)};
-  --color-canvas-default: ${background};
+  // --color-canvas-default: ${background};
+  -- color-canvas-default: transparent;
   --color-canvas-overlay: ${altBackground};
   --color-canvas-inset: ${altBackground};
   --color-canvas-subtle: ${background};
