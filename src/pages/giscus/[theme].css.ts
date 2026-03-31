@@ -54,6 +54,17 @@ const createCss = (styles: ColorStyles) => {
 
 :root,
 main {
+  --fgColor-default: ${foreground};
+  --fgColor-muted: ${muted(foreground, 80)};
+  --fgColor-subtle: ${muted(foreground, 70)};
+  --fgColor-accent: ${link};
+  --fgColor-success: ${green};
+  --fgColor-attention: ${yellow};
+  --fgColor-danger: ${red};
+  --bgColor-default: ${background};
+  --bgColor-muted: ${altBackground};
+  --borderColor-default: ${muted(foreground, 20)};
+  --borderColor-muted: ${muted(foreground, 10)};
   --color-prettylights-syntax-comment: ${comment};
   --color-prettylights-syntax-constant: ${constant};
   --color-prettylights-syntax-entity: ${entity};
@@ -194,7 +205,12 @@ div.gsc-comment-content code {
 .gsc-comment-content p,
 .gsc-comment-content li,
 .gsc-comment-content blockquote {
-  color: var(--color-fg-default) !important;
+  color: var(--fgColor-default, var(--color-fg-default)) !important;
+}
+
+.gsc-comment-content a,
+.markdown-body a {
+  color: var(--fgColor-accent, var(--color-accent-fg)) !important;
 }
 
 main .gsc-loading-image {

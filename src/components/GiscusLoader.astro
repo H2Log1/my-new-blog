@@ -24,6 +24,15 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
 >
 </div>
 <script>
+  const resolveGiscusTheme = (theme: string, origin: string, themeHash: string) => {
+    const isLocal = ['localhost', '127.0.0.1'].some((host) => origin.includes(host))
+    if (isLocal) {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      return prefersDark ? 'dark_dimmed' : 'light'
+    }
+    return `${origin}/giscus/${theme}.css?v=${themeHash}`
+  }
+
   function loadGiscus() {
     const giscusDiv = document.querySelector('.giscus')
     if (!giscusDiv) {
@@ -61,7 +70,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     script.setAttribute('data-emit-metadata', '0')
     // Setting this to 'bottom' doesn't work. Not sure why.
     script.setAttribute('data-input-position', 'top')
-    script.setAttribute('data-theme', `${origin}/giscus/${theme}.css?v=${themeHash}`)
+    script.setAttribute('data-theme', resolveGiscusTheme(theme, origin, themeHash))
     // script.setAttribute('data-theme', `${origin}/giscus/${theme}.css?v=20260331`)
     script.setAttribute('data-lang', 'zh-CN')
     script.setAttribute('loading', 'lazy')
@@ -91,7 +100,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
       return
     }
     giscusFrame.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme: `${origin}/giscus/${theme}.css?v=${themeHash}` } } },
+      { giscus: { setConfig: { theme: resolveGiscusTheme(theme, origin, themeHash) } } },
       'https://giscus.app',
     )
   }
