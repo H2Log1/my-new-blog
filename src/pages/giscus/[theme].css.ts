@@ -1,9 +1,9 @@
-import { type BundledShikiTheme } from 'astro-expressive-code'
-import siteConfig from '~/site.config'
 import type { APIContext } from 'astro'
-import { resolveThemeColorStyles } from '~/utils'
+import { type BundledShikiTheme } from 'astro-expressive-code'
 import Color from 'color'
+import siteConfig from '~/site.config'
 import type { ColorStyles } from '~/types'
+import { resolveThemeColorStyles } from '~/utils'
 
 interface Props {
   theme: BundledShikiTheme
@@ -52,6 +52,7 @@ const createCss = (styles: ColorStyles) => {
  * https://github.com/primer/primitives/blob/main/LICENSE
  */
 
+:root,
 main {
   --color-prettylights-syntax-comment: ${comment};
   --color-prettylights-syntax-constant: ${constant};
@@ -185,6 +186,15 @@ div.gsc-comment-content code {
 .gsc-homepage-bg {
   /* background-color: ${background}; */
   background-color: ${muted(foreground, 2)};
+}
+
+/* Keep comment text readable even if upstream class names shift. */
+.markdown-body,
+.gsc-comment-content,
+.gsc-comment-content p,
+.gsc-comment-content li,
+.gsc-comment-content blockquote {
+  color: var(--color-fg-default) !important;
 }
 
 main .gsc-loading-image {

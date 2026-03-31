@@ -36,6 +36,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     const categoryId = giscusDiv.getAttribute('data-category-id')
     const reactionsEnabled = giscusDiv.getAttribute('data-reactions-enabled')
     const theme = document.documentElement.getAttribute('data-theme')
+    const themeHash = document.documentElement.getAttribute('data-theme-hash')
     if (
       !origin ||
       !repo ||
@@ -43,7 +44,8 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
       !category ||
       !categoryId ||
       !reactionsEnabled ||
-      !theme
+      !theme ||
+      !themeHash
     ) {
       throw new Error('Giscus configuration missing in the Giscus div.')
     }
@@ -59,7 +61,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     script.setAttribute('data-emit-metadata', '0')
     // Setting this to 'bottom' doesn't work. Not sure why.
     script.setAttribute('data-input-position', 'top')
-    script.setAttribute('data-theme', `${origin}/giscus/${theme}`)
+    script.setAttribute('data-theme', `${origin}/giscus/${theme}.css?v=${themeHash}`)
     // script.setAttribute('data-theme', `${origin}/giscus/${theme}.css?v=20260331`)
     script.setAttribute('data-lang', 'zh-CN')
     script.setAttribute('loading', 'lazy')
@@ -69,6 +71,11 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
   }
   async function updateTheme(theme: string) {
     console.log('Updating Giscus theme to:', theme)
+    const themeHash = document.documentElement.getAttribute('data-theme-hash')
+    if (!themeHash) {
+      console.error('Theme hash not found')
+      return
+    }
     let giscusFrame
     // Try to find the Giscus iframe 3 times, in case it takes a moment to load
     for (let i = 0; i < 3; i++) {
@@ -84,7 +91,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
       return
     }
     giscusFrame.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme: `${origin}/giscus/${theme}.css` } } },
+      { giscus: { setConfig: { theme: `${origin}/giscus/${theme}.css?v=${themeHash}` } } },
       'https://giscus.app',
     )
   }
