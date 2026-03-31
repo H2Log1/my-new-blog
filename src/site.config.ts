@@ -170,7 +170,7 @@ const config: SiteConfig = {
   giscus: {
     repo: 'H2Log1/my-new-blog',
     repoId: 'R_kgDOR1ayHg',
-    category: 'Giscus',
+    category: 'Announcements',
     categoryId: 'DIC_kwDOR1ayHs4C5q4N',
     reactionsEnabled: true, // Enable reactions on post itself
   },
