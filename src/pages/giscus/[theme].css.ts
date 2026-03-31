@@ -6,7 +6,8 @@ import Color from 'color'
 import type { ColorStyles } from '~/types'
 
 interface Props {
-  theme: BundledShikiTheme
+  // theme: BundledShikiTheme
+  theme: 'transparent_dark'
   colorStyles: ColorStyles
 }
 
