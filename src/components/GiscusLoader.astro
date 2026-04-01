@@ -26,13 +26,13 @@ const siteOrigin = new URL(siteConfig.site).origin
 >
 </div>
 <script>
-  const resolveGiscusTheme = (theme: string, origin: string, themeHash: string) => {
+  const resolveGiscusTheme = (theme: string, origin: string) => {
     const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname)
     if (isLocal) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
       return prefersDark ? 'dark_dimmed' : 'light'
     }
-    return `${origin}/giscus/${theme}.css?v=${encodeURIComponent(themeHash)}`
+    return `${origin}/giscus/${theme}.css`
   }
 
   function loadGiscus() {
@@ -47,7 +47,6 @@ const siteOrigin = new URL(siteConfig.site).origin
     const categoryId = giscusDiv.getAttribute('data-category-id')
     const reactionsEnabled = giscusDiv.getAttribute('data-reactions-enabled')
     const theme = document.documentElement.getAttribute('data-theme')
-    const themeHash = document.documentElement.getAttribute('data-theme-hash')
     if (
       !siteOrigin ||
       !repo ||
@@ -55,8 +54,7 @@ const siteOrigin = new URL(siteConfig.site).origin
       !category ||
       !categoryId ||
       !reactionsEnabled ||
-      !theme ||
-      !themeHash
+      !theme
     ) {
       throw new Error('Giscus configuration missing in the Giscus div.')
     }
@@ -72,7 +70,7 @@ const siteOrigin = new URL(siteConfig.site).origin
     script.setAttribute('data-emit-metadata', '0')
     // Setting this to 'bottom' doesn't work. Not sure why.
     script.setAttribute('data-input-position', 'top')
-    script.setAttribute('data-theme', resolveGiscusTheme(theme, siteOrigin, themeHash))
+    script.setAttribute('data-theme', resolveGiscusTheme(theme, siteOrigin))
     // script.setAttribute('data-theme', `${origin}/giscus/${theme}.css?v=20260331`)
     script.setAttribute('data-lang', 'zh-CN')
     script.setAttribute('loading', 'lazy')
@@ -90,9 +88,8 @@ const siteOrigin = new URL(siteConfig.site).origin
     console.log('Updating Giscus theme to:', theme)
     const giscusDiv = document.querySelector('.giscus')
     const siteOrigin = giscusDiv?.getAttribute('data-site-origin')
-    const themeHash = document.documentElement.getAttribute('data-theme-hash')
-    if (!themeHash || !siteOrigin) {
-      console.error('Theme hash or site origin not found')
+    if (!siteOrigin) {
+      console.error('Site origin not found')
       return
     }
     let giscusFrame
@@ -109,7 +106,7 @@ const siteOrigin = new URL(siteConfig.site).origin
       return
     }
     giscusFrame.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme: resolveGiscusTheme(theme, siteOrigin, themeHash) } } },
+      { giscus: { setConfig: { theme: resolveGiscusTheme(theme, siteOrigin) } } },
       'https://giscus.app',
     )
   }
