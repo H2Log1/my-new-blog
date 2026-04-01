@@ -25,7 +25,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
 </div>
 <script>
   const resolveGiscusTheme = (theme: string, origin: string, themeHash: string) => {
-    const isLocal = ['localhost', '127.0.0.1'].some((host) => origin.includes(host))
+    const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname)
     if (isLocal) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
       return prefersDark ? 'dark_dimmed' : 'light'
@@ -38,7 +38,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     if (!giscusDiv) {
       throw new Error('Giscus div not found in the document.')
     }
-    const origin = giscusDiv.getAttribute('data-origin')
+    const origin = window.location.origin
     const repo = giscusDiv.getAttribute('data-repo')
     const repoId = giscusDiv.getAttribute('data-repo-id')
     const category = giscusDiv.getAttribute('data-category')
@@ -47,7 +47,6 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     const theme = document.documentElement.getAttribute('data-theme')
     const themeHash = document.documentElement.getAttribute('data-theme-hash')
     if (
-      !origin ||
       !repo ||
       !repoId ||
       !category ||
@@ -76,6 +75,12 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     script.setAttribute('loading', 'lazy')
     script.crossOrigin = 'anonymous'
     script.async = true
+    script.addEventListener('load', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme')
+      if (currentTheme) {
+        void updateTheme(currentTheme)
+      }
+    })
     document.body.appendChild(script)
   }
   async function updateTheme(theme: string) {
@@ -85,14 +90,14 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
       console.error('Theme hash not found')
       return
     }
+    const origin = window.location.origin
     let giscusFrame
-    // Try to find the Giscus iframe 3 times, in case it takes a moment to load
-    for (let i = 0; i < 3; i++) {
+    // Try to find the Giscus iframe multiple times to avoid race conditions on slower devices.
+    for (let i = 0; i < 10; i++) {
       giscusFrame = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame')
       if (giscusFrame) break
       console.log('Giscus iframe not found, retrying...')
-      // Wait a moment before trying again
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await new Promise((resolve) => setTimeout(resolve, 500))
     }
     // If the iframe is still not found, log an error and return
     if (!giscusFrame) {

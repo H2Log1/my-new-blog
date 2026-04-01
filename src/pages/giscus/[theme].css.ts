@@ -10,6 +10,12 @@ interface Props {
   colorStyles: ColorStyles
 }
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': 'https://giscus.app',
+  'Access-Control-Allow-Methods': 'GET, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+} as const
+
 const createCss = (styles: ColorStyles) => {
   const muted = (color: string, amount: number) => {
     const x = Color(color)
@@ -224,11 +230,17 @@ export async function GET(context: APIContext) {
   const css = createCss(colorStyles)
   return new Response(css, {
     headers: {
-      'Access-Control-Allow-Origin': 'https://giscus.app',
-      'Access-Control-Allow-Methods': 'GET OPTIONS',
+      ...corsHeaders,
       'Cache-Control': 'public, max-age=31536000, immutable',
       'Content-Type': 'text/css',
     },
+  })
+}
+
+export async function OPTIONS() {
+  return new Response(null, {
+    status: 204,
+    headers: corsHeaders,
   })
 }
 
