@@ -247,7 +247,7 @@ export async function GET(context: APIContext) {
   return new Response(css, {
     headers: {
       ...corsHeaders,
-      'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
+      'Cache-Control': 'public, max-age=60, s-maxage=60, stale-while-revalidate=300',
       'Content-Type': 'text/css',
     },
   })
