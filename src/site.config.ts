@@ -43,6 +43,10 @@ const config: SiteConfig = {
       url: '/posts',
     },
     {
+      name: "Projects",
+      url: '/projects',
+    },
+    {
       name: 'GitHub',
       url: 'https://github.com/H2Log1',
       external: true,
