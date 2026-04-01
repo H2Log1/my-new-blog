@@ -11,11 +11,13 @@ const repoId = giscusConfig.repoId
 const category = giscusConfig.category
 const categoryId = giscusConfig.categoryId
 const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
+const siteOrigin = new URL(siteConfig.site).origin
 ---
 
 <div
   class="giscus"
   data-origin={origin}
+  data-site-origin={siteOrigin}
   data-repo={repo}
   data-repo-id={repoId}
   data-category={category}
@@ -38,7 +40,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     if (!giscusDiv) {
       throw new Error('Giscus div not found in the document.')
     }
-    const origin = window.location.origin
+    const siteOrigin = giscusDiv.getAttribute('data-site-origin')
     const repo = giscusDiv.getAttribute('data-repo')
     const repoId = giscusDiv.getAttribute('data-repo-id')
     const category = giscusDiv.getAttribute('data-category')
@@ -47,6 +49,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     const theme = document.documentElement.getAttribute('data-theme')
     const themeHash = document.documentElement.getAttribute('data-theme-hash')
     if (
+      !siteOrigin ||
       !repo ||
       !repoId ||
       !category ||
@@ -69,7 +72,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
     script.setAttribute('data-emit-metadata', '0')
     // Setting this to 'bottom' doesn't work. Not sure why.
     script.setAttribute('data-input-position', 'top')
-    script.setAttribute('data-theme', resolveGiscusTheme(theme, origin, themeHash))
+    script.setAttribute('data-theme', resolveGiscusTheme(theme, siteOrigin, themeHash))
     // script.setAttribute('data-theme', `${origin}/giscus/${theme}.css?v=20260331`)
     script.setAttribute('data-lang', 'zh-CN')
     script.setAttribute('loading', 'lazy')
@@ -85,12 +88,13 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
   }
   async function updateTheme(theme: string) {
     console.log('Updating Giscus theme to:', theme)
+    const giscusDiv = document.querySelector('.giscus')
+    const siteOrigin = giscusDiv?.getAttribute('data-site-origin')
     const themeHash = document.documentElement.getAttribute('data-theme-hash')
-    if (!themeHash) {
-      console.error('Theme hash not found')
+    if (!themeHash || !siteOrigin) {
+      console.error('Theme hash or site origin not found')
       return
     }
-    const origin = window.location.origin
     let giscusFrame
     // Try to find the Giscus iframe multiple times to avoid race conditions on slower devices.
     for (let i = 0; i < 10; i++) {
@@ -105,7 +109,7 @@ const reactionsEnabled = giscusConfig.reactionsEnabled ? '1' : '0'
       return
     }
     giscusFrame.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme: resolveGiscusTheme(theme, origin, themeHash) } } },
+      { giscus: { setConfig: { theme: resolveGiscusTheme(theme, siteOrigin, themeHash) } } },
       'https://giscus.app',
     )
   }
