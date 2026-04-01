@@ -219,6 +219,22 @@ div.gsc-comment-content code {
   color: var(--fgColor-accent, var(--color-accent-fg)) !important;
 }
 
+/* Prevent Windows/browser forced-colors mode from overriding giscus to pure black/white. */
+@media (forced-colors: active) {
+  :root,
+  main,
+  .markdown-body,
+  .gsc-comment,
+  .gsc-comment-content,
+  .gsc-comment-box,
+  .gsc-reply-box {
+    forced-color-adjust: none;
+    color: var(--fgColor-default, var(--color-fg-default)) !important;
+    border-color: var(--borderColor-default, var(--color-border-default)) !important;
+    background-color: var(--bgColor-default, var(--color-canvas-default)) !important;
+  }
+}
+
 main .gsc-loading-image {
   background-image: url("https://github.githubassets.com/images/mona-loading-dimmed.gif");
 }
