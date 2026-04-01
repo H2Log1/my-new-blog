@@ -26,13 +26,13 @@ const siteOrigin = new URL(siteConfig.site).origin
 >
 </div>
 <script>
-  const resolveGiscusTheme = (theme: string, origin: string, themeHash: string) => {
+  const resolveGiscusTheme = (theme: string, origin: string) => {
     const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname)
     if (isLocal) {
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
       return prefersDark ? 'dark_dimmed' : 'light'
     }
-    return `${origin}/giscus/${theme}.css?v=${themeHash}`
+    return `${origin}/giscus/${theme}.css`
   }
 
   function loadGiscus() {
@@ -72,7 +72,7 @@ const siteOrigin = new URL(siteConfig.site).origin
     script.setAttribute('data-emit-metadata', '0')
     // Setting this to 'bottom' doesn't work. Not sure why.
     script.setAttribute('data-input-position', 'top')
-    script.setAttribute('data-theme', resolveGiscusTheme(theme, siteOrigin, themeHash))
+    script.setAttribute('data-theme', resolveGiscusTheme(theme, siteOrigin))
     // script.setAttribute('data-theme', `${origin}/giscus/${theme}.css?v=20260331`)
     script.setAttribute('data-lang', 'zh-CN')
     script.setAttribute('loading', 'lazy')
@@ -109,7 +109,7 @@ const siteOrigin = new URL(siteConfig.site).origin
       return
     }
     giscusFrame.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme: resolveGiscusTheme(theme, siteOrigin, themeHash) } } },
+      { giscus: { setConfig: { theme: resolveGiscusTheme(theme, siteOrigin) } } },
       'https://giscus.app',
     )
   }
