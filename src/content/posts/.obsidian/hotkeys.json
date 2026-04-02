@@ -14,5 +14,13 @@
       ],
       "key": "C"
     }
+  ],
+  "templater-obsidian:0 Template/Template-Post.md.md": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "T"
+    }
   ]
 }
