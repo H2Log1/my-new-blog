@@ -22,3 +22,15 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+templates/
+
+# 忽略 Obsidian 的工作区和缓存文件等
+.obsidian/workspace.json
+.obsidian/cache/
+.obsidian/indexed-db/
+.obsidian/plugins/
+.obsidian/appearance.json
+
+# 忽略 VSCode 的设置和扩展
+.vscode/
