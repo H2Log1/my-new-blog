@@ -69,3 +69,22 @@ $$
 
 ## 线性方程组的求解
 
+1. 高斯消元法
+2. 列主元素消去法
+3. 矩阵分解法
+	1. 直接三角分解法：$A=LU$
+	2. 平方根法（对称正定矩阵）：$A=LL^T$
+	3. 改进的平方根法：$A=LDL^T$
+4. 误差估计与扰动分析
+	1. 常见向量范数：
+		1. 1-范数：$\Vert x \Vert _1 = \sum^n_{i=1}|x_i|$
+		2. 2-范数：$\Vert x \Vert _2 = \big( \sum^n_{i=1}x^2_i \big) ^{\frac{1}{2}}$
+		3. 无穷范数（最大范数）：$\Vert x \Vert _\infty = \underset{1 \leq i \leq n}{\max}|x_i|$
+	2.  常见矩阵范数
+		1. F-范数：$\Vert A \Vert _F = \big( \sum^n_{i=1} \sum^n_{j=1} a^2_{ij} \big) ^{\frac{1}{2}}$
+		2. 常见算子范数：
+			1. 1-范数（列范数）：$\Vert A \Vert _1 = \underset{1 \geq j \leq n}{\max} \sum^n_{i=1} |a_{ij}|$
+			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$
+			3. 无穷范数（行范数）：$\Vert A \Vert _{\infty} = \underset{1 \leq i \leq n}{\max} \sum^n_{j=1} |a_{ij}|$
+	3. 矩阵的条件数：设 $A$ 非奇异，则称 $Cond(A) = \Vert A^{-1} \Vert \Vert A \Vert$ 为 $A$ 的条件数
+	
