@@ -36,7 +36,7 @@ tags: ['计算方法', '课程笔记']
 			对 $x_0,x_1,...,x_n,f(x_i)=y_i$，满足：
 			1. 分段三次多项式
 			2. 二阶连续导数 **（考过）**
-			3. $S(x_i)=f(x_i)=y_i$ 
+			3. $S(x_i)=f(x_i)=y_i$   
 			$$S(x) = \left\{ \begin{array}{cc} S_0(x) & x \in [x_0,x_1] \\ \vdots & \vdots \\ S_n(x) & x \in [x_{n-1},x_n] \end{array} \right.$$
 2. 拟合
 	1. 最小二乘法
