@@ -27,10 +27,22 @@ tags: ['计算方法', '课程笔记']
 	1. 拉格朗日插值
 	2. 牛顿插值
 	3. 埃尔米特插值
+		1. 三点三次埃尔米特插值
+		2. 两点三次埃尔米特插值
 	4. 分段低次插值
+		1. 分段线性插值
+		2. 分段埃尔米特插值
+		3. 三次样条插值 **（考定义）**：
+			对 $x_0,x_1,...,x_n,f(x_i)=y_i$，满足：
+			1. 分段三次多项式
+			2. 二阶连续导数 **（考过）**
+			3. $S(x_i)=f(x_i)=y_i$ 
+			$$S(x) = \left\{ \begin{array}{cc} S_0(x) & x \in [x_0,x_1] \\ \vdots & \vdots \\ S_n(x) & x \in [x_{n-1},x_n] \end{array} \right.$$
 2. 拟合
 	1. 最小二乘法
 	2. 非线性拟合
+		1. $y = a e^{bx}$ ：线性化，$\ln y = \ln a + bx$
+		2. $y = a x^b$ ：线性化，$\ln y = \ln a + b \ln x$
 
 ---
 
@@ -56,7 +68,7 @@ $$
 ### 收敛性与稳定性
 1. 在求积公式 $I \approx \sum_{k=0}^n A_k f(x_k)$ 中，若$$\lim_{n \to \infty} \lim_{h \to 0} \sum_{k=0}^n A_k f(x_k) = \int_a^b f(x) dx$$其中，$h = \max_{1 \leq i \leq n} (x_i-x_{i-1})$，则称该公式是收敛的。
 2. 对任给的 $\epsilon > 0$，若存在 $\delta > 0$，只要 $|f(x_k) - \overline{f}_k| < \delta (k=1,2,\ldots,n)$，就有$$\left| I_n(f) - I_n(\overline{f}) \right| = \left|\sum_{k=0}^n A_k[f(x_k) - \overline{f}_k] \right| < \epsilon$$则称该公式是稳定的。
-3. 在求积公式 $I \approx \sum_{k=0}^n A_k f(x_k)$ 中，若系数 $A_k$ 满足$$\sum_{k=0}^n A_k > 0$$其中，$M$ 为常数，则称该公式是稳定的。
+3. 在求积公式 $I \approx \sum_{k=0}^n A_k f(x_k)$ 中，若系数 $A_k$ 满足$$\sum_{k=0}^n A_k > 0$$其中，$M$ 为常数，则称该公式是稳定的。**（考判断）** 
 ### 牛顿-柯特斯公式
 $$
 \int_a^b f(x) dx \approx (b - a) \sum_{k=0}^n C_k^{(n)} f(x_k) \\
@@ -79,6 +91,7 @@ $$
 \int_a^b f(x) dx \approx \frac{b-a}{6} [f(a) + 4f\left(\frac{a+b}{2}\right) + f(b)] = S \\
 R[f] = -\frac{(b-a)^5}{2880} f^{(4)}(\xi), \xi \in (a, b)
 $$
+$n$ 为偶数时，牛顿-柯特斯公式至少有 $n+1$ 次代数精度。
 ### 复化（复合）积分公式
 1. 复化梯形公式
 $$
@@ -96,6 +109,7 @@ $$
 ---
 
 ## 线性方程组的数值解法
+对于 $Ax = b$，
 1. 高斯消元法
 2. 列主元素消去法
 3. 矩阵分解法
@@ -104,14 +118,14 @@ $$
 	3. 改进的平方根法：$A=LDL^T$
 4. 误差估计与扰动分析
 	1. 常见向量范数：
-		1. 1-范数：$\Vert x \Vert _1 = \sum^n_{i=1}|x_i|$
-		2. 2-范数：$\Vert x \Vert _2 = \big( \sum^n_{i=1}x^2_i \big) ^{\frac{1}{2}}$
-		3. 无穷范数（最大范数）：$\Vert x \Vert _\infty = \underset{1 \leq i \leq n}{\max}|x_i|$
+		1. 1-范数：$\Vert x \Vert _1 = \sum^n_{i=1}|x_i|$ 绝对值之和
+		2. 2-范数：$\Vert x \Vert _2 = \big( \sum^n_{i=1}x^2_i \big) ^{\frac{1}{2}}$ 平方和开根号
+		3. 无穷范数（最大范数）：$\Vert x \Vert _\infty = \underset{1 \leq i \leq n}{\max}|x_i|$ 绝对值最大值
 	2.  常见矩阵范数
-		1. F-范数：$\Vert A \Vert _F = \big( \sum^n_{i=1} \sum^n_{j=1} a^2_{ij} \big) ^{\frac{1}{2}}$
+		1. F-范数：$\Vert A \Vert _F = \big( \sum^n_{i=1} \sum^n_{j=1} a^2_{ij} \big) ^{\frac{1}{2}}$ 平方和开根号
 		2. 常见算子范数：
-			1. 1-范数（列范数）：$\Vert A \Vert _1 = \underset{1 \geq j \leq n}{\max} \sum^n_{i=1} |a_{ij}|$
-			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$
-			3. 无穷范数（行范数）：$\Vert A \Vert _{\infty} = \underset{1 \leq i \leq n}{\max} \sum^n_{j=1} |a_{ij}|$
+			1. 1-范数（列范数）：$\Vert A \Vert _1 = \underset{1 \geq j \leq n}{\max} \sum^n_{i=1} |a_{ij}|$ 列和最大值
+			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$ 特征值最大值（$A^TA$）
+			3. 无穷范数（行范数）：$\Vert A \Vert _{\infty} = \underset{1 \leq i \leq n}{\max} \sum^n_{j=1} |a_{ij}|$ 行和最大值
 	3. 矩阵的条件数：设 $A$ 非奇异，则称 $Cond(A) = \Vert A^{-1} \Vert \Vert A \Vert$ 为 $A$ 的条件数
 	
