@@ -1,6 +1,6 @@
 # H2Log1's Blog
 
-## 📄 License
+## License
 
 This project is licensed under the [MIT License](LICENSE.txt).
 
