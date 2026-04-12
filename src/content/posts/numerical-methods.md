@@ -130,4 +130,10 @@ $$
 			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$ 特征值最大值（$A^TA$）
 			3. 无穷范数（行范数）：$\Vert A \Vert _{\infty} = \underset{1 \leq i \leq n}{\max} \sum^n_{j=1} |a_{ij}|$ 行和最大值
 	3. 矩阵的条件数：设 $A$ 非奇异，则称 $Cond(A) = \Vert A^{-1} \Vert \Vert A \Vert$ 为 $A$ 的条件数
-	
+5. 迭代法
+	1. 矩阵分裂迭代法
+		$A = D-L-U = M-N$ 
+		1. Jacobi 迭代：$M=D,N=L+U$ 
+		2. Gauss-Seidel 迭代：$M=D-L,N=U$ 
+		3. SOR 迭代：$M=\frac{1}{\omega}(D - \omega L),N=\frac{1}{\omega}[(1-\omega)D + \omega U]$  
+	2. $x^{k+1} = Bx^k + f$ 收敛 $\Leftrightarrow$ $\rho(B) < 1$ 
