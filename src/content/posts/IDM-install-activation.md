@@ -8,7 +8,7 @@ tags:
 ---
 ---
 
-# # IDM 安装激活完整教程
+# # IDM 安装激活教程
 
 ## 下载 IDM 
 从IDM官网下载最新的官方安装包：[Internet Download Manager](https://www.internetdownloadmanager.com/)
