@@ -1,5 +1,5 @@
 ---
-title: IDM 安装激活完整教程
+title: IDM 安装激活教程
 published: 2026-04-15
 draft: false
 description: ""
