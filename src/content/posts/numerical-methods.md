@@ -120,15 +120,15 @@ $$
 	3. 改进的平方根法：$A=LDL^T$
 4. 误差估计与扰动分析
 	1. 常见向量范数：
-		1. 1-范数：$\Vert x \Vert _1 = \sum^n_{i=1}|x_i|$ 绝对值之和
-		2. 2-范数：$\Vert x \Vert _2 = \big( \sum^n_{i=1}x^2_i \big) ^{\frac{1}{2}}$ 平方和开根号
-		3. 无穷范数（最大范数）：$\Vert x \Vert _\infty = \underset{1 \leq i \leq n}{\max}|x_i|$ 绝对值最大值
+		1. 1-范数：$\Vert x \Vert _1 = \sum^n_{i=1}|x_i|$ **绝对值之和**
+		2. 2-范数：$\Vert x \Vert _2 = \big( \sum^n_{i=1}x^2_i \big) ^{\frac{1}{2}}$ **平方和开根号**
+		3. 无穷范数（最大范数）：$\Vert x \Vert _\infty = \underset{1 \leq i \leq n}{\max}|x_i|$ **绝对值最大值**
 	2.  常见矩阵范数
-		1. F-范数：$\Vert A \Vert _F = \big( \sum^n_{i=1} \sum^n_{j=1} a^2_{ij} \big) ^{\frac{1}{2}}$ 平方和开根号
+		1. F-范数：$\Vert A \Vert _F = \big( \sum^n_{i=1} \sum^n_{j=1} a^2_{ij} \big) ^{\frac{1}{2}}$ **平方和开根号**
 		2. 常见算子范数：
-			1. 1-范数（列范数）：$\Vert A \Vert _1 = \underset{1 \geq j \leq n}{\max} \sum^n_{i=1} |a_{ij}|$ 列和最大值
-			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$ 特征值的绝对值的最大值（$A^TA$）
-			3. 无穷范数（行范数）：$\Vert A \Vert _{\infty} = \underset{1 \leq i \leq n}{\max} \sum^n_{j=1} |a_{ij}|$ 行和最大值
+			1. 1-范数（列范数）：$\Vert A \Vert _1 = \underset{1 \geq j \leq n}{\max} \sum^n_{i=1} |a_{ij}|$ **列和最大值**
+			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$ **特征值的绝对值的最大值（$A^TA$）**
+			3. 无穷范数（行范数）：$\Vert A \Vert _{\infty} = \underset{1 \leq i \leq n}{\max} \sum^n_{j=1} |a_{ij}|$ **行和最大值**
 	3. 矩阵的条件数：设 $A$ 非奇异，则称 $Cond(A) = \Vert A^{-1} \Vert \Vert A \Vert$ 为 $A$ 的条件数
 	4. 迭代法
 		1. 矩阵分裂迭代法：$A = D-L-U = M-N$ 
