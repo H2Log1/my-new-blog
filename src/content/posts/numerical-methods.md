@@ -135,4 +135,48 @@ $$
 			1. Jacobi 迭代：$M=D,N=L+U$ 
 			2. Gauss-Seidel 迭代：$M=D-L,N=U$ 
 			3. SOR 迭代：$M=\frac{1}{\omega}(D - \omega L),N=\frac{1}{\omega}[(1-\omega)D + \omega U]$  
-		2. $x^{k+1} = Bx^k + f$ 收敛 $\Leftrightarrow$ $\rho(B) < 1$ ，特征值的绝对值的最大值（$B$）
+		2. $x^{(k+1)} = Bx^{(k)} + f$ 收敛 $\Leftrightarrow$ $\rho(B) < 1$ ，特征值的绝对值的最大值（$B$）
+
+例如：对于
+$$
+\begin{pmatrix}
+2 & -1 & 0 \\
+-1 & 3 & -1 \\
+0 & -1 & 2 \\
+\end{pmatrix}
+\begin{pmatrix}
+x_{1} \\
+x_{2} \\
+x_{3} \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 \\
+8 \\
+-5 \\
+\end{pmatrix}
+$$
+1. Jacobi 迭代
+$$
+\begin{cases}
+x^{(k+1)}_{1} = \frac{1}{2}(1 + x^{(k)}_{2}) \\
+x^{(k+1)}_{2} = \frac{1}{3}(8 + x^{(k)}_{1} + x^{(k)}_{3}) \\
+x^{(k+1)}_{3} = \frac{1}{2}(-5 + x^{(k)}_{2})
+\end{cases}
+$$
+2. Gauss-Seidel 迭代
+$$
+\begin{cases}
+x^{(k+1)}_{1} = \frac{1}{2}(1 + x^{(k)}_{2}) \\
+x^{(k+1)}_{2} = \frac{1}{3}(8 + x^{(k+1)}_{1} + x^{(k)}_{3}) \\
+x^{(k+1)}_{3} = \frac{1}{2}(-5 + x^{(k+1)}_{2})
+\end{cases}
+$$
+3. SOR 迭代
+$$
+\begin{cases}
+x^{(k+1)}_{1} = x^{(k)}_{1} + \omega \frac{1}{2}(1 - 2x^{(k)}_{1} + x^{(k)}_{2}) \\
+x^{(k+1)}_{2} = x^{(k)}_{2} + \omega \frac{1}{3}(8 + x^{(k+1)}_{1} - 3x^{(k)}_{2} + x^{(k)}_{3}) \\
+x^{(k+1)}_{3} = x^{(k)}_{3} + \omega \frac{1}{2}(-5 + x^{(k+1)}_{2} - 2x^{(k)}_{3})
+\end{cases}
+$$
