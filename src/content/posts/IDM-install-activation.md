@@ -14,7 +14,9 @@ tags:
 从IDM官网下载最新的官方安装包：[Internet Download Manager](https://www.internetdownloadmanager.com/)
 
 ## 激活 IDM
-通过脚本激活：[IDM-Activation-Script](https://github.com/Astro-Saurav/IDM-Activation-Script)
+通过脚本激活：
+[IDM-Activation-Script](https://github.com/Astro-Saurav/IDM-Activation-Script)（原版）
+[IDM-CN](https://github.com/jarocheng0123/IDM-CN)（汉化版）
 1. 打开`PowerShell`，输入：
 	```bash
 		 irm "https://bit.ly/idm_Activate" | iex
