@@ -127,7 +127,7 @@ $$
 		1. F-范数：$\Vert A \Vert _F = \big( \sum^n_{i=1} \sum^n_{j=1} a^2_{ij} \big) ^{\frac{1}{2}}$ 平方和开根号
 		2. 常见算子范数：
 			1. 1-范数（列范数）：$\Vert A \Vert _1 = \underset{1 \geq j \leq n}{\max} \sum^n_{i=1} |a_{ij}|$ 列和最大值
-			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$ 特征值最大值（$A^TA$）
+			2. 2-范数（谱范数）：$\sqrt{\rho(A^T A)}$ 特征值的绝对值的最大值（$A^TA$）
 			3. 无穷范数（行范数）：$\Vert A \Vert _{\infty} = \underset{1 \leq i \leq n}{\max} \sum^n_{j=1} |a_{ij}|$ 行和最大值
 	3. 矩阵的条件数：设 $A$ 非奇异，则称 $Cond(A) = \Vert A^{-1} \Vert \Vert A \Vert$ 为 $A$ 的条件数
 	4. 迭代法
@@ -135,4 +135,4 @@ $$
 			1. Jacobi 迭代：$M=D,N=L+U$ 
 			2. Gauss-Seidel 迭代：$M=D-L,N=U$ 
 			3. SOR 迭代：$M=\frac{1}{\omega}(D - \omega L),N=\frac{1}{\omega}[(1-\omega)D + \omega U]$  
-		2. $x^{k+1} = Bx^k + f$ 收敛 $\Leftrightarrow$ $\rho(B) < 1$ 
+		2. $x^{k+1} = Bx^k + f$ 收敛 $\Leftrightarrow$ $\rho(B) < 1$ ，特征值的绝对值的最大值（$B$）
